@@ -8,3 +8,17 @@ public class TransactionStack {
         this.data = new char[capacity];
         this.top = -1;
     }
+
+    public void push(char c) {
+        if (top == capacity - 1) {
+            throw new RuntimeException("Stack overflow");
+        }
+        data[++top] = c;
+    }
+
+    public char pop() {
+        if (isEmpty()) {
+            throw new RuntimeException("Stack underflow");
+        }
+        return data[top--];
+    }
