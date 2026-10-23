@@ -37,3 +37,27 @@ public class CacheLocalityBenchmark {
 
         return sum;
     }
+
+    public static void main(String[] args) {
+        double[][] matrix = createMatrix();
+        long rowTotalNs = 0;
+        long colTotalNs = 0;
+        double checkRow = 0;
+        double checkCol = 0;
+
+        for (int it = 1; it <= ITERATIONS; it++) {
+            long t1 = System.nanoTime();
+            checkRow = rowMajorSum(matrix);
+            long rowNs = System.nanoTime() - t1;
+
+            long t2 = System.nanoTime();
+            checkCol = columnMajorSum(matrix);
+            long colNs = System.nanoTime() - t2;
+
+            rowTotalNs += rowNs;
+            colTotalNs += colNs;
+
+            System.out.println("Iteration " + it
+                    + " | Row-major: " + rowNs / 1_000_000 + " ms"
+                    + " | Column-major: " + colNs / 1_000_000 + " ms");
+        }
