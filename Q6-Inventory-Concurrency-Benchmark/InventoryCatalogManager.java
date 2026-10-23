@@ -36,3 +36,10 @@ public class InventoryCatalogManager {
         executor.awaitTermination(5, TimeUnit.MINUTES);
         return (System.nanoTime() - start) / 1_000_000;
     }
+
+    public static void main(String[] args) throws Exception {
+        Map<Integer, Integer> syncMap =
+                Collections.synchronizedMap(new HashMap<>());
+
+        long syncTime = benchmark(syncMap);
+        System.out.println("Collections.synchronizedMap : " + syncTime + " ms");
