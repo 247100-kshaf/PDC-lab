@@ -61,3 +61,14 @@ public class CacheLocalityBenchmark {
                     + " | Row-major: " + rowNs / 1_000_000 + " ms"
                     + " | Column-major: " + colNs / 1_000_000 + " ms");
         }
+
+        double rowAvg = rowTotalNs / (double) ITERATIONS / 1_000_000.0;
+        double colAvg = colTotalNs / (double) ITERATIONS / 1_000_000.0;
+
+        System.out.println("Checksums match: " + (checkRow == checkCol));
+        System.out.println(String.format("Average row-major:    %.2f ms", rowAvg));
+        System.out.println(String.format("Average column-major: %.2f ms", colAvg));
+        System.out.println(String.format("Column-major is %.2fx slower than row-major",
+                colAvg / Math.max(rowAvg, 0.001)));
+    }
+}
