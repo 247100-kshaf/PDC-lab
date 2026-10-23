@@ -25,3 +25,15 @@ public class CacheLocalityBenchmark {
 
         return sum;
     }
+
+    private static double columnMajorSum(double[][] m) {
+        double sum = 0;
+
+        for (int j = 0; j < SIZE; j++) {
+            for (int i = 0; i < SIZE; i++) {
+                sum += m[i][j];
+            }
+        }
+
+        return sum;
+    }
