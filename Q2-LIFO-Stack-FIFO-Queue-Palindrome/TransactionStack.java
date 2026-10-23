@@ -22,3 +22,15 @@ public class TransactionStack {
         }
         return data[top--];
     }
+
+    public char peek() {
+        if (isEmpty()) {
+            throw new RuntimeException("Stack is empty");
+        }
+        return data[top];
+    }
+
+    public boolean isEmpty() {
+        return top == -1;
+    }
+}
