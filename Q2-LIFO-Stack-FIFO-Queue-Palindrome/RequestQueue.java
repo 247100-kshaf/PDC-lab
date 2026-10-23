@@ -21,3 +21,18 @@ public class RequestQueue {
         data[rear] = c;
         size++;
     }
+
+    public char dequeue() {
+        if (isEmpty()) {
+            throw new RuntimeException("Queue underflow");
+        }
+        char c = data[front];
+        front = (front + 1) % capacity;
+        size--;
+        return c;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+}
