@@ -9,3 +9,15 @@ public abstract class SensorSearchEngine implements Runnable {
         this.startIdx = startIdx;
         this.endIdx = endIdx;
     }
+
+    public abstract void processGrid();
+
+    @Override
+    public void run() {
+        processGrid();
+    }
+
+    public double getResult() {
+        return result;
+    }
+}
