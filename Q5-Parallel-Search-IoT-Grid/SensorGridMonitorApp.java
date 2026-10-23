@@ -35,3 +35,26 @@ public class SensorGridMonitorApp {
         }
 
         System.out.println("Minimum temperature across grid: " + globalMin);
+
+        ParallelMaxSearch[] maxTasks = new ParallelMaxSearch[workers];
+        Thread[] maxThreads = new Thread[workers];
+
+        for (int w = 0; w < workers; w++) {
+            int s = w * chunk;
+            int e = (w == workers - 1) ? size : s + chunk;
+
+            maxTasks[w] = new ParallelMaxSearch(sensorData, s, e);
+            maxThreads[w] = new Thread(maxTasks[w], "Max-Worker-" + w);
+            maxThreads[w].start();
+        }
+
+        double globalMax = -Double.MAX_VALUE;
+
+        for (int w = 0; w < workers; w++) {
+            maxThreads[w].join();
+            globalMax = Math.max(globalMax, maxTasks[w].getResult());
+        }
+
+        System.out.println("Maximum vibration peak across grid: " + globalMax);
+    }
+}
