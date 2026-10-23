@@ -47,3 +47,11 @@ public class InventoryCatalogManager {
         Map<Integer, Integer> concurrentMap = new ConcurrentHashMap<>();
         long concurrentTime = benchmark(concurrentMap);
         System.out.println("ConcurrentHashMap           : " + concurrentTime + " ms");
+
+        int totalOps = THREADS * OPS_PER_THREAD;
+        double speedup = (double) syncTime / Math.max(concurrentTime, 1);
+
+        System.out.println("Total lookup+update operations per run: " + totalOps);
+        System.out.println(String.format("ConcurrentHashMap speedup: %.2fx", speedup));
+    }
+}
