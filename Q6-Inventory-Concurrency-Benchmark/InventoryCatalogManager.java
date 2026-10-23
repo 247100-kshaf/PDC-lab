@@ -43,3 +43,7 @@ public class InventoryCatalogManager {
 
         long syncTime = benchmark(syncMap);
         System.out.println("Collections.synchronizedMap : " + syncTime + " ms");
+
+        Map<Integer, Integer> concurrentMap = new ConcurrentHashMap<>();
+        long concurrentTime = benchmark(concurrentMap);
+        System.out.println("ConcurrentHashMap           : " + concurrentTime + " ms");
