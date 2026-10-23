@@ -13,3 +13,15 @@ public class CacheLocalityBenchmark {
 
         return m;
     }
+
+    private static double rowMajorSum(double[][] m) {
+        double sum = 0;
+
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                sum += m[i][j];
+            }
+        }
+
+        return sum;
+    }
