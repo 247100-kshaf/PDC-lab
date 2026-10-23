@@ -12,3 +12,11 @@ public class ForkJoinPortfolioApp {
         }
 
         System.out.println("Generated " + size + " synthetic asset values.");
+
+        ForkJoinPool pool = new ForkJoinPool();
+        long parStart = System.nanoTime();
+        double parallelRisk = pool.invoke(
+                new ParallelRiskCalculator(assets, 0, assets.length));
+        long parTime = System.nanoTime() - parStart;
+
+        System.out.println("Parallel total risk: " + parallelRisk);
